@@ -14,6 +14,7 @@ class TextFieldWidget extends StatelessWidget {
     this.inputFormatters,
     this.prefixWidget,
     this.suffixWidget,
+    this.obscureText = false,
   });
   final TextEditingController controller;
   final String? label;
@@ -24,6 +25,7 @@ class TextFieldWidget extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final Widget? prefixWidget;
   final Widget? suffixWidget;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class TextFieldWidget extends StatelessWidget {
               child: Row(children: [Text(label!, style: labelSmall)]),
             ),
           TextFormField(
+            obscureText: obscureText,
             inputFormatters: inputFormatters,
             validator: validator,
             controller: controller,

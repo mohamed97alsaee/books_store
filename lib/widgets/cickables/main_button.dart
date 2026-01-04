@@ -30,7 +30,7 @@ class MainButton extends StatelessWidget {
         style: ButtonStyle(
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(8),
+              borderRadius: BorderRadiusGeometry.circular(16),
               side: withBorder
                   ? BorderSide(color: txtColor, width: 1)
                   : BorderSide.none,
@@ -45,24 +45,27 @@ class MainButton extends StatelessWidget {
           }
           onTap();
         },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedSwitcher(
-              duration: animationDuration,
-              child: busy
-                  ? SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.white38,
-                        color: Colors.white,
-                        strokeWidth: 3,
-                      ),
-                    )
-                  : Text(title, style: labelMedium.copyWith(color: txtColor)),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedSwitcher(
+                duration: animationDuration,
+                child: busy
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.white38,
+                          color: Colors.white,
+                          strokeWidth: 3,
+                        ),
+                      )
+                    : Text(title, style: labelMedium.copyWith(color: txtColor)),
+              ),
+            ],
+          ),
         ),
       ),
     );

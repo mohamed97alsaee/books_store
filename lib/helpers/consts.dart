@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ------------------- API CONSTS -------------------
-String baseUrl = "";
+String baseUrl = "https://demo.vueltd.co.uk";
 
 // ------------------- COLORS CONSTS -------------------
 

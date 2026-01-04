@@ -39,6 +39,7 @@ dependencies:
   shimmer:
   shared_preferences:
   google_fonts:
+  another_flushbar:
 
 dev_dependencies:
   flutter_test:

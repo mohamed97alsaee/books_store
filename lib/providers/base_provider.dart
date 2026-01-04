@@ -16,4 +16,10 @@ class BaseProvider with ChangeNotifier {
     failed = status;
     notifyListeners();
   }
+
+  String? errorMessage;
+  void setErrorMessage(String? msg) {
+    errorMessage = msg;
+    notifyListeners();
+  }
 }

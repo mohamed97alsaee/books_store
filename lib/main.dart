@@ -16,11 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => AuthProvider()..initAuthProvider(),
-        ),
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Books Store',
@@ -39,6 +35,12 @@ class ScreenRouter extends StatefulWidget {
 }
 
 class _ScreenRouterState extends State<ScreenRouter> {
+  @override
+  void initState() {
+    Provider.of<AuthProvider>(context, listen: false).initAuthProvider();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(

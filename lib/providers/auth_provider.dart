@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:books_store/providers/base_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,11 +30,45 @@ class AuthProvider extends BaseProvider {
     }
   }
 
-  void register() {}
+  Future<List> register(Map body) async {
+    setBusy(true);
+    final response = await api.post("/api/customer/sign-up", body);
+    if (response.statusCode == 201) {
+      setFailed(false);
+      setBusy(false);
+      return [true, json.decode(response.body)['message']];
+    } else {
+      setFailed(true);
+      setBusy(false);
+      return [false, json.decode(response.body)['message']];
+    }
+  }
 
-  void login() {}
+  Future<List> login(Map body) async {
+    setBusy(true);
+    final response = await api.post("/api/login", body);
+    if (response.statusCode == 200) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.setString("token", json.decode(response.body)['access_token']);
+
+      setFailed(false);
+      setBusy(false);
+      return [true, "User Loged Successfully"];
+    } else {
+      setFailed(true);
+      setBusy(false);
+      return [false, json.decode(response.body)['message']];
+    }
+  }
 
   void getMe() {}
 
-  void logout() {}
+  Future<bool> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("token");
+    status = AuthStatus.unauthenticated;
+    setBusy(false);
+    return true;
+  }
 }

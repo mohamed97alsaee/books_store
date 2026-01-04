@@ -5,7 +5,14 @@ import 'package:http/http.dart' as http;
 
 class Api {
   Future<Response> get(String endPoint) async {
-    final response = await http.get(Uri.parse("$baseUrl$endPoint"));
+    final response = await http.get(
+      Uri.parse("$baseUrl$endPoint"),
+
+      headers: {
+        "Accept": "application/json",
+        // "content-type": "application/json",
+      },
+    );
 
     if (kDebugMode) {
       print("RESPONSE GET : $baseUrl$endPoint");
@@ -18,6 +25,10 @@ class Api {
   Future<Response> post(String endPoint, Map body) async {
     final response = await http.post(
       Uri.parse("$baseUrl$endPoint"),
+      headers: {
+        "Accept": "application/json",
+        // "content-type": "application/json",
+      },
       body: body,
     );
 
@@ -30,7 +41,14 @@ class Api {
   }
 
   Future<Response> put(String endPoint, Map body) async {
-    final response = await http.put(Uri.parse("$baseUrl$endPoint"), body: body);
+    final response = await http.put(
+      Uri.parse("$baseUrl$endPoint"),
+      body: body,
+      headers: {
+        "Accept": "application/json",
+        // "content-type": "application/json",
+      },
+    );
     if (kDebugMode) {
       print("RESPONSE PUT : $baseUrl$endPoint");
       print("RESPONSE STATUS CODE : ${response.statusCode}");
@@ -43,6 +61,10 @@ class Api {
     final response = await http.delete(
       Uri.parse("$baseUrl$endPoint"),
       body: body,
+      headers: {
+        "Accept": "application/json",
+        // "content-type": "application/json",
+      },
     );
 
     if (kDebugMode) {
